@@ -24,3 +24,4 @@ struct Heap{
 struct Heap* genHeap(enum HeapType type);
 void heapInsert(struct Heap* heap,HEAP_DATA_TYPE data,int cost);
 void heapRemove(struct Heap* heap);
+void destroyHeap(struct Heap* heap);
