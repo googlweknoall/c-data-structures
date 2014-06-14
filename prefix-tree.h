@@ -19,3 +19,4 @@ void prefixTreeInsert(struct PrefixTree* tree,const PREFIX_TREE_NODE_TYPE arr[],
 unsigned char prefixTreeExists(struct PrefixTree* tree,const PREFIX_TREE_NODE_TYPE arr[]);
 PREFIX_TREE_PAYLOAD_TYPE prefixTreeIndex(struct PrefixTree* tree,const PREFIX_TREE_NODE_TYPE arr[]);
 void prefixTreeRemove(struct PrefixTree* tree,const PREFIX_TREE_NODE_TYPE arr[]);
+void destroyPrefixTree(struct PrefixTree* tree);
