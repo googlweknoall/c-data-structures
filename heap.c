@@ -124,3 +124,8 @@ void heapRemove(struct Heap* heap){
         assert(heap->num>0);
     }
 }
+
+void destroyHeap(struct Heap* heap){
+    free(heap->heapData);
+    free(heap);
+}
