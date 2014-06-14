@@ -96,4 +96,43 @@ PREFIX_TREE_PAYLOAD_TYPE prefixTreeIndex(struct PrefixTree* tree,const PREFIX_TR
     return tree->payload;
 }
 
-//TO BE IMPLEMENTED: void prefixTreeRemove(struct PrefixTree* tree,const PREFIX_TREE_NODE_TYPE arr[]);
+void prefixTreeRemove(struct PrefixTree* tree,const PREFIX_TREE_NODE_TYPE arr[]){
+    if(*arr){
+        unsigned int i;
+        for(i=0;i<tree->num;++i){
+            if(tree->children[i].identifier==*arr){
+                struct PrefixTree* child=&(tree->children[i])
+                prefixTreeRemove(child,++arr);
+                if(!child->num){
+                    free(child);
+                    tree->children[i]=NULL;
+                    unsigned int j;
+                    for(j=i+1;j<tree->num;++j){
+                        tree->children[j-1]=tree->children[j];
+                    }
+                    --tree->num;
+                }
+                if(!tree->num){
+                    free(tree->children); //signal the parent call to prefixTreeRemove to free tree
+                }
+                break;
+            }
+        }
+    }else{
+        if(tree->num){
+            tree->containsPayload=0;
+            tree->payload=0;
+        }else{
+            free(tree->children);
+            //free(tree); //tree is needed to be alive for the parent to determine if it should recursively free itself
+        }
+    }
+}
+
+void destroyPrefixTree(struct PrefixTree* tree){
+    unsigned int i;
+    for(i=0;i<tree->num;++i){
+        destroyPrefixTree(&(tree->children[i]));
+    }
+    free(tree);
+}
